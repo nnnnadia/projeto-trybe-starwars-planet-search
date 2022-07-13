@@ -1,11 +1,12 @@
 import React from 'react';
-import PlanetsProvider from './context/PlanetsProvider';
+import { PlanetsProvider } from './context';
+import { PlanetsTable, FilterForms } from './components';
 import './App.css';
-import PlanetsTable from './components/PlanetsTable';
 
 function App() {
   return (
     <PlanetsProvider>
+      <FilterForms />
       <PlanetsTable />
     </PlanetsProvider>
   );

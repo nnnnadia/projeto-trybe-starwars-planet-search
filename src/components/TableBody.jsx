@@ -14,27 +14,27 @@ function TableBody() {
     return nameFilter.test(name);
   };
 
-  // const testFilterByNumericValues = ({
-  //   population,
-  //   orbital_period: orbitalPeriod,
-  //   diameter,
-  //   rotation_period: rotationPeriod,
-  //   surface_water: surfaceWater,
-  // }) => {
   const testFilterByNumericValues = (planet) => {
     const manyNumericFilters = filters.filterByNumericValues.length;
     if (manyNumericFilters === 0) return true;
-    const { column, comparison, value } = filters.filterByNumericValues[0];
-    switch (comparison) {
-    case 'maior que':
-      return +planet[column] > +value;
-    case 'menor que':
-      return +planet[column] < +value;
-    case 'igual a':
-      return +planet[column] === +value;
-    default:
-      return false;
+    const passAllFilters = [];
+    for (let i = 0; i < manyNumericFilters; i += 1) {
+      const { column, comparison, value } = filters.filterByNumericValues[i];
+      switch (comparison) {
+      case 'maior que':
+        passAllFilters.push(+planet[column] > +value);
+        break;
+      case 'menor que':
+        passAllFilters.push(+planet[column] < +value);
+        break;
+      case 'igual a':
+        passAllFilters.push(+planet[column] === +value);
+        break;
+      default:
+        return false;
+      }
     }
+    return passAllFilters.every((check) => check);
   };
 
   return (

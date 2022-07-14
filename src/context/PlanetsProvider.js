@@ -4,7 +4,10 @@ import PlanetsContext from './PlanetsContext';
 
 function PlanetsProvider({ children }) {
   const [data, setData] = useState([]);
-  const [filters, setFilters] = useState({ filterByName: { name: '' } });
+  const [filters, setFilters] = useState({
+    filterByName: { name: '' },
+    filterByNumericValues: [],
+  });
 
   async function fetchPlanetsData() {
     const ENDPOINT = 'https://swapi-trybe.herokuapp.com/api/planets/';

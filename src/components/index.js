@@ -1,5 +1,4 @@
 import FilterForms from './FilterForms';
-import NameInput from './NameInput';
-import PlanetsTable from './PlanetsTable';
+import TableHead from './TableHead';
 
-export { FilterForms, NameInput, PlanetsTable };
+export { FilterForms, TableHead };

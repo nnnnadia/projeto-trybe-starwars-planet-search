@@ -10,9 +10,10 @@ function NameInput() {
   return (
     <input
       type="text"
+      name="name"
       value={ filters.filterByName.name }
       onChange={ ({ target }) => setFilters({
-        ...filters, filterByName: { name: target.value },
+        ...filters, filterByName: { [target.name]: target.value },
       }) }
       data-testid="name-filter"
     />

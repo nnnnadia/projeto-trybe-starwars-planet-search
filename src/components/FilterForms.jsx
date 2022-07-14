@@ -1,9 +1,13 @@
 import React from 'react';
 import NameInput from './NameInput';
+import NumberInput from './NumberInput';
 
 function FilterForms() {
   return (
-    <NameInput />
+    <form>
+      <NameInput />
+      <NumberInput />
+    </form>
   );
 }
 

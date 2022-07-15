@@ -4,6 +4,7 @@ import PlanetsContext from '../context';
 function NumberInput() {
   const {
     filters,
+    filters: { filterByNumericValues },
     setFilters,
   } = useContext(PlanetsContext);
 
@@ -20,9 +21,20 @@ function NumberInput() {
   const handleButton = () => setFilters({
     ...filters,
     filterByNumericValues: [
-      ...filters.filterByNumericValues, numericValue,
+      ...filterByNumericValues, numericValue,
     ],
   });
+
+  const getPossibleColumnOptions = () => {
+    const allOptions = [
+      'population',
+      'orbital_period',
+      'diameter',
+      'rotation_period',
+      'surface_water'];
+    const selectedOptions = filterByNumericValues.map((filter) => filter.column);
+    return allOptions.filter((option) => !selectedOptions.includes(option));
+  };
 
   return (
     <>
@@ -31,11 +43,16 @@ function NumberInput() {
         onChange={ (e) => handleChange(e) }
         data-testid="column-filter"
       >
-        <option value="population">population</option>
-        <option value="orbital_period">orbital_period</option>
-        <option value="diameter">diameter</option>
-        <option value="rotation_period">rotation_period</option>
-        <option value="surface_water">surface_water</option>
+        {
+          getPossibleColumnOptions().map((option) => (
+            <option
+              key={ option }
+              value={ option }
+            >
+              { option }
+            </option>
+          ))
+        }
       </select>
       <select
         name="comparison"

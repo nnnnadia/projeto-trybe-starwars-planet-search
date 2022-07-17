@@ -10,7 +10,7 @@ function NumberInput() {
   } = useContext(PlanetsContext);
 
   const [numericValue, setNumericValue] = useState({
-    column: 'population',
+    column: '',
     comparison: 'maior que',
     value: 0,
   });

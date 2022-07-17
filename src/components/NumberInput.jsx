@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import PlanetsContext from '../context';
+import FiltersInAction from './FiltersInAction';
 
 function NumberInput() {
   const {
@@ -9,20 +10,13 @@ function NumberInput() {
   } = useContext(PlanetsContext);
 
   const [numericValue, setNumericValue] = useState({
-    column: 'population',
+    column: '',
     comparison: 'maior que',
     value: 0,
   });
 
   const handleChange = ({ target }) => setNumericValue({
     ...numericValue, [target.name]: target.value,
-  });
-
-  const handleButton = () => setFilters({
-    ...filters,
-    filterByNumericValues: [
-      ...filterByNumericValues, numericValue,
-    ],
   });
 
   const getPossibleColumnOptions = () => {
@@ -34,6 +28,20 @@ function NumberInput() {
       'surface_water'];
     const selectedOptions = filterByNumericValues.map((filter) => filter.column);
     return allOptions.filter((option) => !selectedOptions.includes(option));
+  };
+
+  const handleButton = () => {
+    setFilters({
+      ...filters,
+      filterByNumericValues: [
+        ...filterByNumericValues, numericValue,
+      ],
+    });
+    setNumericValue({
+      column: getPossibleColumnOptions()[0],
+      comparison: 'maior que',
+      value: 0,
+    });
   };
 
   return (
@@ -77,6 +85,7 @@ function NumberInput() {
       >
         Filtrar
       </button>
+      <FiltersInAction />
     </>
   );
 }
